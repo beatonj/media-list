@@ -1,19 +1,16 @@
 package net.johnbeaton.apps.pdb.activity;
 
-import java.util.concurrent.Future;
-
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-
 import net.johnbeaton.apps.pdb.R;
 import net.johnbeaton.apps.pdb.data.EntityCursor;
 import net.johnbeaton.apps.pdb.data.EntityListAdapter;
 import net.johnbeaton.apps.pdb.model.Entity;
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 
 public abstract class EntityListActivity<T extends Entity> extends Activity {
 	private ListView listView;
@@ -26,7 +23,7 @@ public abstract class EntityListActivity<T extends Entity> extends Activity {
 		adapter = getAdapter();
 		listView.setAdapter(adapter);
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -34,16 +31,16 @@ public abstract class EntityListActivity<T extends Entity> extends Activity {
 			public void onSuccess(EntityCursor<T> result) {
 				adapter.setEntityCursor(result);
 			}
-			
+
 			public void onFailure(Throwable t) {
 				// Do nothing
 				adapter.setEntityCursor(null);
 			}
 		});
 	}
-	
+
 	protected abstract ListenableFuture<EntityCursor<T>> beginCursorLoad();
 
 	protected abstract EntityListAdapter<T> getAdapter();
-	
+
 }
