@@ -7,7 +7,7 @@ public class BookListAdapter extends EntityListAdapter<Book> {
 
 	@Override
 	protected void bindView(EntityListItem view, Book item) {
-		
+		view.setTitle(item.getName());
 	}
-	
+
 }

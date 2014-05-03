@@ -8,4 +8,5 @@ public interface EntityCursor<T extends Entity> {
 
 	T getItem(int position);
 
+	void close();
 }

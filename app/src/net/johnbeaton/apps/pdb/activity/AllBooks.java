@@ -8,9 +8,15 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 public class AllBooks extends BookListActivity {
 
+	private Database database;
+
+	public AllBooks() {
+		database = new Database(this);
+	}
+
 	@Override
 	protected ListenableFuture<EntityCursor<Book>> beginCursorLoad() {
-		return Database.getBooks();
+		return database.getBooks();
 	}
 
 }
